@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.6.4/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+    <h1 class="text-5xl font-bold text-center mb-8">This is my First Blog</h1>
+    <p class="text-xl font-medium">1.Discuss the scope of var, let, and const</p>
+    <p>var: Scoped to the function or global context.
+        Gets hoisted (moved to the top) within its scope, so it can be accessed before it's declared.
+        Can lead to unexpected behaviors due to hoisting and wider scope.</p>
+    <p>let: Scoped to the block (curly braces) it's in, like an if statement or loop.
+        Doesn't get hoisted, so it can only be accessed after it's declared.
+        Safer and more predictable for most cases, especially in modern JavaScript.</p>
+    <p>const: Also scoped to the block it's in, just like let.
+        Like let, doesn't get hoisted and can only be accessed after it's declared.
+        Must be assigned a value when declared and cannot be reassigned afterwards.
+        Ideal for values that won't change, making your code more readable and less error-prone.</p>
+    <p>In short, prefer using let and const due to their clearer scoping rules and avoidance of common pitfalls
+        associated with var. Use const when you want to keep a value constant, and use let for variables that can change
+        their value.</p>
+
+
+
+    <p class="text-xl font-medium">2.Tell us the use cases of null and undefined</p>
+    <p>Undefined- Indicates an uninitialized variable, an absent value, or the default return value of a function with
+        no explicit return.</p>
+    <p>Use cases: Declared variables without values, missing function arguments, checking property existence.</p>
+    <p>Null: Explicitly represents an empty or no-value state, often set by the programmer.</p>
+    <p>Use cases: Assigning no value to a variable, indicating absence in objects or APIs, representing emptiness
+        intentionally.</p>
+
+
+    <p class="text-xl font-medium">3.What do you mean by REST API?</p>
+    <p>A REST API (Representational State Transfer Application Programming Interface) is a standardized way for software
+        applications to communicate over the internet. It follows a set of rules and conventions that allow clients and
+        servers to exchange data using standard HTTP methods like GET, POST, PUT, and DELETE. It's commonly used in web
+        development to create web services and enable different applications to interact with each other.</p>
+
+</body>
+
+</html>
