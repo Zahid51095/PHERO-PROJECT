@@ -1,14 +1,16 @@
-const handleCategory = async() => {
-    const response = await fetch("https://openapi.programming-hero.com/api/videos/categories");
-    const data = await response.json();
-    const buttonContainer = document.getElementById("btn-container");
-    data.data.forEach((category) => {
-        const div = document.createElement("div");
-        div.innerHTML = `
+const handleCategory = async () => {
+  const response = await fetch(
+    "https://openapi.programming-hero.com/api/videos/categories"
+  );
+  const data = await response.json();
+  const buttonContainer = document.getElementById("btn-container");
+  data.data.forEach((category) => {
+    const div = document.createElement("div");
+    div.innerHTML = `
         <button onclick="handleLoadVideos('${category.category_id}')" class="btn">${category.category}</button>
         `;
-        buttonContainer.appendChild(div);
-    });
+    buttonContainer.appendChild(div);
+  });
 };
 
 const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -23,18 +25,32 @@ const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" 
 </defs>
 </svg>`;
 
-const handleLoadVideos = async(categoryId) => {
-    const response = await fetch(` https://openapi.programming-hero.com/api/videos/category/${categoryId}`);
-    const data = await response.json();
-    const cardContainer = document.getElementById("card-container");
-    data.data.forEach((videos) => {
-        console.log(videos);
-        const div = document.createElement('div');
-    div.innerHTML=`
-    <div class="card bg-base-100 shadow-xl">
+const handleLoadVideos = async (categoryId) => {
+  const response = await fetch(
+    ` https://openapi.programming-hero.com/api/videos/category/${categoryId}`
+  );
+  const data = await response.json();
+  const cardContainer = document.getElementById("card-container");
+
+  if(data.data.length === 0){
+    cardContainer.innerHTML = `<div class="grid grid-cols-1 justify-center items-center col-span-4">
+    <div class="flex flex-col items-center justify-center">
+    <img src="./Icon.png"/>
+     <p class="text-2xl font-bold text-center">Oops!! Sorry, There is no content here</p></div>
+    </div>`
+    return;
+  }
+
+  cardContainer.innerHTML = "";
+
+  data.data.forEach((videos) => {
+    console.log(videos);
+    const div = document.createElement("div");
+    div.innerHTML = `
+    <div class="card bg-base-100 shadow-xl w-72 h-96">
     <!-- Main Image -->
     <figure>
-        <img src="${videos?.thumbnail}"  alt="Video Thumbnail" />
+        <img class="w-full h-full" src="${videos?.thumbnail}"  alt="Video Thumbnail" />
     </figure>
     <!-- Card Body (Text Content) -->
     <div class="card-body">
@@ -42,7 +58,9 @@ const handleLoadVideos = async(categoryId) => {
         <div class="flex items-center space-x-4">
             <!-- Author's Image (Left) -->
             <div class="w-14 h-14 rounded-full overflow-hidden mb-8">
-                <img src="${videos?.authors?.[0]?.profile_picture}" alt="Author" class="w-full h-full object-cover">
+                <img src="${
+                  videos?.authors?.[0]?.profile_picture
+                }" alt="Author" class="w-full h-full object-cover">
             </div>
             <!-- Right Side Content (Title, Author's Name, Verified Icon, Views) -->
             <div class="flex flex-col">
@@ -53,7 +71,9 @@ const handleLoadVideos = async(categoryId) => {
                     <!-- Author's Name -->
                     <h3 class="">${videos?.authors?.[0]?.profile_name}</h3>
                     <!-- Verified Icon -->
-                    <div class="w-4 h-4">${videos?.authors?.[0]?.verified ? iconSvg : ''}</div>
+                    <div class="w-4 h-4">${
+                      videos?.authors?.[0]?.verified ? iconSvg : ""
+                    }</div>
                 </div>
                 <!-- Views -->
                 <p>${videos?.others?.views} views</p>
@@ -62,7 +82,10 @@ const handleLoadVideos = async(categoryId) => {
     </div>
 </div>
     `;
-        cardContainer.appendChild(div);
-    });
+    cardContainer.appendChild(div);
+  });
 };
+
 handleCategory();
+
+handleLoadVideos("1000");
