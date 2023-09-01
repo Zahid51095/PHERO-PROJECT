@@ -45,12 +45,17 @@ const handleLoadVideos = async (categoryId) => {
 
   data.data.forEach((videos) => {
     console.log(videos);
+
+    const convertedTime = convertSecondsToHoursAndMinutes(videos?.others?.posted_date);
+    
+
     const div = document.createElement("div");
     div.innerHTML = `
     <div class="card bg-base-100 shadow-xl w-72 h-96">
     <!-- Main Image -->
-    <figure>
+    <figure class="relative">
         <img class="w-full h-full" src="${videos?.thumbnail}"  alt="Video Thumbnail" />
+        <div class="absolute bottom-2 right-2 text-xs text-right text-white bg-black bg-opacity-50 px-1 rounded">${convertedTime}</div>
     </figure>
     <!-- Card Body (Text Content) -->
     <div class="card-body">
@@ -85,6 +90,17 @@ const handleLoadVideos = async (categoryId) => {
     cardContainer.appendChild(div);
   });
 };
+
+const convertSecondsToHoursAndMinutes = (seconds) => {
+   if(seconds){
+    const hours = Math.floor(seconds/3600);
+    const minutes = Math.floor((seconds%3600)/60);
+    return `${hours}hrs ${minutes} min ago`
+   }
+   else {
+    return "";
+   }
+}
 
 handleCategory();
 
