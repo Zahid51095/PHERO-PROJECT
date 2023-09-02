@@ -1,16 +1,20 @@
+
 const handleCategory = async () => {
+
   const response = await fetch(
     "https://openapi.programming-hero.com/api/videos/categories"
   );
   const data = await response.json();
   const buttonContainer = document.getElementById("btn-container");
+
   data.data.forEach((category) => {
     const div = document.createElement("div");
     div.innerHTML = `
-        <button onclick="handleLoadVideos('${category.category_id}')" class="btn">${category.category}</button>
+        <button onclick="handleLoadVideos('${category.category_id}', false)" class="btn">${category.category}</button>
         `;
     buttonContainer.appendChild(div);
   });
+  
 };
 
 const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -25,11 +29,12 @@ const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" 
 </defs>
 </svg>`;
 
-const handleLoadVideos = async (categoryId) => {
+const handleLoadVideos = async (categoryId, shouldSort = true) => {
   const response = await fetch(
     ` https://openapi.programming-hero.com/api/videos/category/${categoryId}`
   );
   const data = await response.json();
+  
   const cardContainer = document.getElementById("card-container");
 
   if(data.data.length === 0){
@@ -42,6 +47,14 @@ const handleLoadVideos = async (categoryId) => {
   }
 
   cardContainer.innerHTML = "";
+
+  if(shouldSort){
+    // Call the sorting function to sort the data
+    const sortedData = sortVideosByViews(data.data);
+    data.data = sortedData;
+  }
+  
+  
 
   data.data.forEach((videos) => {
     console.log(videos);
@@ -91,6 +104,7 @@ const handleLoadVideos = async (categoryId) => {
   });
 };
 
+
 const convertSecondsToHoursAndMinutes = (seconds) => {
    if(seconds){
     const hours = Math.floor(seconds/3600);
@@ -100,7 +114,7 @@ const convertSecondsToHoursAndMinutes = (seconds) => {
    else {
     return "";
    }
-}
+};
 
 handleCategory();
 

@@ -16,7 +16,7 @@
                 <img src="./Logo.png" alt="logo">
             </div>
             <div class="flex-grow text-center mb-4 md:mb-0">
-                <button class="rounded bg-[#25252533] text-[#252525] text-lg font-medium px-5 py-2">Sort by view</button>
+                <button onclick="handleLoadVideos('1000', true)"  id="sort-by-views" class="rounded bg-[#25252533] text-[#252525] text-lg font-medium px-5 py-2">Sort by view</button>
             </div>
             <div>
                 <a href="blog.html"><button class="rounded bg-[#FF1F3D] text-white py-2 px-5 text-xl font-medium">Blog</button></a>
@@ -38,13 +38,13 @@
     <div id="card-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
     </div>
    
-   
-
 </section>
+ <!-- card section ends here -->
 
 
     
       
     <script src="js/app.js"></script>
+    <script src="js/sort.js"></script>
 </body>
 </html>
