@@ -49,7 +49,6 @@ const handleLoadVideos = async (categoryId, shouldSort = false) => {
   cardContainer.innerHTML = "";
 
   if(shouldSort){
-    // Call the sorting function to sort the data
     const sortedData = sortVideosByViews(data.data);
     data.data = sortedData;
   }
@@ -57,11 +56,9 @@ const handleLoadVideos = async (categoryId, shouldSort = false) => {
   
 
   data.data.forEach((videos) => {
-    console.log(videos);
 
     const convertedTime = convertSecondsToHoursAndMinutes(videos?.others?.posted_date);
-    
-
+  
     const div = document.createElement("div");
     div.innerHTML = `
     <div class="card bg-base-100 shadow-xl w-72 h-96">
