@@ -29,7 +29,7 @@ const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" 
 </defs>
 </svg>`;
 
-const handleLoadVideos = async (categoryId, shouldSort = true) => {
+const handleLoadVideos = async (categoryId, shouldSort = false) => {
   const response = await fetch(
     ` https://openapi.programming-hero.com/api/videos/category/${categoryId}`
   );
